@@ -1,0 +1,14 @@
+SELECT t.id as ticket_id, a.id as message_id, t.title as title, m.A_body as origin_message, t.CUSTOMER_USER_ID as from, 
+u.login as owner, q.name as queue, ty.NAME as type, se.name as service, t.service_id,
+a.CREATE_TIME as created
+FROM ticket as t
+JOIN article as a ON a.ticket_id=t.id AND a.id in
+(SELECT min(a.id) as first FROM ticket as t
+JOIN article as a ON a.ticket_id=t.id
+group by t.id)
+JOIN article_data_mime as m ON a.id=m.id
+JOIN users as u ON u.id = t.USER_ID
+JOIN queue as q ON q.id = t.QUEUE_ID
+JOIN ticket_type as ty ON ty.id = t.TYPE_ID
+JOIN service as se ON se.id = t.SERVICE_ID
+ORDER BY t.id
