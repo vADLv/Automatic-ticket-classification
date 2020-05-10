@@ -5,7 +5,7 @@ There is a ticket system in the IT Department at Innopolis University. Every mon
 
 ![Alt Text](img/my.gif)
 
-The project’s purpose is to automate the definition of related service, decrease reaction time and increase IT-administrators’ effi- ciency.
+The project’s purpose is to automate the definition of related service, decrease reaction time and increase IT-administrators’ efficiency.
 > "No ticket - no service"
 
 This can be done,e.g by using text classification with neural networks taking into account a large set of previously collected data (7000+ raw messages).
