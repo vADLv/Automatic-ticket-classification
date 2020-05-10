@@ -63,11 +63,11 @@ nltk.download('punkt')
 
 nltk.download('stopwords')
 from nltk.corpus import stopwords
-from nltk.stem.snowball import SnowballStemmer  
+from nltk.stem.snowball import SnowballStemmer
 from itertools import chain
 
 class Preprocessor:
-    
+
     def __init__(self):
         #english
         #self.stop_words = {'a', 'an', 'and', 'are', 'as', 'at', 'be', 'by', 'for', 'from', 'has', 'he', 'in', 'is', 'it', 'its',
@@ -77,9 +77,9 @@ class Preprocessor:
 
         #russian
         self.stop_words.extend(stopwords.words("russian"))
-        self.stem_ru = SnowballStemmer("russian") 
+        self.stem_ru = SnowballStemmer("russian")
 
-        self.signature = ['best regard', 'best regards', 'kind regards','regards', 'yours sincerely', 
+        self.signature = ['best regard', 'best regards', 'kind regards','regards', 'yours sincerely',
                           'sincerely yours','yours faithfully','faithfully yours','faithfully','sincerely',
                           'best wishes','с уважением','искренне ваш','с наилучшими пожеланиями','целую']
 
@@ -107,7 +107,7 @@ class Preprocessor:
         else:
             return self.stem_en.stem(word)
 
-    # check if word is appropriate - not a stop word and isalpha, 
+    # check if word is appropriate - not a stop word and isalpha,
     # i.e consists of letters, not punctuation, numbers, dates
     def is_apt_word(self, word):
         #store numbers but delete punctuation
@@ -121,9 +121,9 @@ class Preprocessor:
     def preprocess(self, text):
         tokenized = self.tokenize(self.remove_signature(text.lower()))
         self.stop_words = set(chain(*[nltk.word_tokenize(www) for www in self.stop_words]))
-        return ' '.join( [self.stem(w) for w in tokenized if self.is_apt_word(w)] ) 
-        #return ' '.join( [w for w in tokenized if self.is_apt_word(w)] ) 
-        #return ' '.join( [w for w in tokenized if w.isalnum()] ) 
+        return ' '.join( [self.stem(w) for w in tokenized if self.is_apt_word(w)] )
+        #return ' '.join( [w for w in tokenized if self.is_apt_word(w)] )
+        #return ' '.join( [w for w in tokenized if w.isalnum()] )
         #return ' '.join( [self.stem(w) for w in tokenized if w.isalnum()] )
 
 
@@ -263,24 +263,3 @@ while True:
         print(f'Predicted service for ticket №{lc[i]}: {get_sname(pred_ticket[i].argmax())} - {round(pred_ticket[i].max()*100,2)}%')
 
     time.sleep(SLEEP_TIME)
-
-
-# In[213]:
-
-
-lc1 = client.ticket_search(TicketCreateTimeNewerDate=week, Services = list(services_df.name))
-lc2 = client.ticket_search(TicketCreateTimeNewerDate=week)
-lct = client.ticket_get_by_list(list(set(lc2)-set(lc1)),articles=1)
-
-
-# In[214]:
-
-
-lct
-
-
-# In[ ]:
-
-
-
-
