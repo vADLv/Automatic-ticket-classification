@@ -245,7 +245,8 @@ while True:
     week = datetime.utcnow() - timedelta(hours=HOURS)
     lc1 = client.ticket_search(TicketCreateTimeNewerDate=week, Services = list(services_df.name))
     lc2 = client.ticket_search(TicketCreateTimeNewerDate=week)
-    lct = client.ticket_get_by_list(list(set(lc2)-set(lc1)),articles=1)
+    lc = list(set(lc2)-set(lc1)
+    lct = client.ticket_get_by_list(lc),articles=1)
     tickets=[]
     for ticket in lct:
         ticket_text = ticket.field_get('Title') + '\n ' + ticket.articles[0].field_get('Body')
