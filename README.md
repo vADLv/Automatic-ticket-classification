@@ -1,4 +1,4 @@
-# AIR project
+# DEMO project
 ## Automatic ticket service classification in the IT department
 
 There is a ticket system in the IT Department at Innopolis University. Every month IT Dep. has to deal with 500+ various tickets from diverse users on both English and Russian languages. For every ticket, the IT administrator should define related service, type of ticket and owner person by hand.
